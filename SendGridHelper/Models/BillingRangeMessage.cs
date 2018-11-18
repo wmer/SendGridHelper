@@ -17,6 +17,36 @@ namespace SendGridHelper.Models {
             }
         }
 
+        private string _emailToRedirect;
+
+        public string EmailToRedirect {
+            get { return _emailToRedirect; }
+            set {
+                _emailToRedirect = value;
+                OnPropertyChanged("EmailToRedirect");
+            }
+        }
+
+        private string _subject;
+
+        public string Subject {
+            get { return _subject; }
+            set {
+                _subject = value;
+                OnPropertyChanged("Subject");
+            }
+        }
+
+        private string _signature;
+
+        public string Signature {
+            get { return _signature; }
+            set {
+                _signature = value;
+                OnPropertyChanged("Signature");
+            }
+        }
+
         private string _message;
 
         public string Message {
@@ -27,6 +57,6 @@ namespace SendGridHelper.Models {
         }
 
 
-        public virtual Campaign Campaign { get; set; }
+        public virtual Company Campaign { get; set; }
     }
 }
