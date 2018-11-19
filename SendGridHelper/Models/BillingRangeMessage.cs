@@ -56,7 +56,15 @@ namespace SendGridHelper.Models {
             }
         }
 
+        private List<Contact> _contacts;
 
-        public virtual Company Campaign { get; set; }
+        public virtual List<Contact> Contacts {
+            get { return _contacts; }
+            set { _contacts = value;
+                OnPropertyChanged("Contacts");
+            }
+        }
+
+        public virtual Company Company { get; set; }
     }
 }
