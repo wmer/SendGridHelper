@@ -78,9 +78,9 @@ namespace ConsoleApp1 {
             var apiKey = "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";
             var api = new SendGridApi(apiKey);
 
-            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\Campanha Teste.txt";
+            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\E-MAIL CLIENTES DE 3 A 60 DIAS_19_11.txt";
 
-            var msg1 = "Olá {0}<br/> Essa é uma mensagem de teste!";
+            var msg1 = "{0}<br/><br/>Somos da TelBe, notamos que houve algum imprevisto com o pagamento da fatura.<br/><br/>Estamos aqui para lhe ajudar.Não perca tempo!<br/><br/>Providencie o pagamento do boleto retirando no portal do assinante: http://www.portaltelbe.com.br ou entre em contato conosco no telefone abaixo, para maiores informações.<br/><br/>                Ligue agora: <a href='tel: 1145943346'>11 4594-3346</a>(Itatiba)<br/>                      <a href='tel: 1935157200'>19 3515 - 7200</a>(Demais Regiões)<br/><br/>Caso tenha pago, favor desconsiderar esse e-mail.<br/>Att,<br/>";
 
             using (var sr = new StreamReader(archive1, Encoding.GetEncoding("iso-8859-1"))) {
                 string contact;
@@ -102,9 +102,9 @@ namespace ConsoleApp1 {
                                 var messageFormated = string.Format(msg1, name);
 
                                 var email = new Email {
-                                    From = new Contact { Name = "William", Email = "master_william_@hotmail.com" },
+                                    From = new Contact { Name = "TelBe", Email = "cobranca@telbe.com.br" },
                                     To = contacts,
-                                    Subject = "Campanha de Teste",
+                                    Subject = "Comunicado TelBe",
                                     PlainTextContent = "",
                                     HtmlContent = messageFormated
                                 };
