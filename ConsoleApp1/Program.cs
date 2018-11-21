@@ -20,7 +20,7 @@ namespace ConsoleApp1 {
             var apiKey = "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";
             var api = new SendGridApi(apiKey);
 
-            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\e-mail 18 dias_07_11.txt";
+            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\e-mail 15 dias_20_11.txt";
 
             var txt = File.ReadAllText(archive1, Encoding.GetEncoding("iso-8859-1"));
             txt = txt.Replace(",", Environment.NewLine);
@@ -28,7 +28,7 @@ namespace ConsoleApp1 {
 
             File.WriteAllText(archive1, txt);
 
-            var msg1 = $"";
+            var msg1 = $"Somos da TCM, notamos que houve algum imprevisto com o pagamento da fatura. <br/>Estamos aqui para lhe ajudar.Não perca tempo!<br/>Providencie o pagamento do boleto retirando no portal do assinante: www.tcmhd.com.br ou entre em contato conosco no telefone abaixo, para maiores informações.<br/>Ligue agora: <a href='tel: 8433150700'>084 33150700</a><br/><br/><br/>Caso tenha pago, favor desconsiderar esse e-mail.<br/>4C Consultoria -Relacionamento com o cliente da TCM";
 
             using (var sr = new StreamReader(archive1, Encoding.GetEncoding("iso-8859-1"))) {
                 string contato;
@@ -50,9 +50,9 @@ namespace ConsoleApp1 {
 
                 foreach (var splited in emailsSpliteed) {
                     var email = new Email {
-                        From = new Contact { Name = "", Email = "" },
+                        From = new Contact { Name = "TCM", Email = "fatura@tcmcabo.com.br" },
                         To = splited,
-                        Subject = "",
+                        Subject = "Comunicado TCM",
                         PlainTextContent = "",
                         HtmlContent = msg1
                     };
