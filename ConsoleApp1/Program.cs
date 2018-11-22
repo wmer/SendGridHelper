@@ -13,14 +13,14 @@ using SendGridHelper.Helpers;
 namespace ConsoleApp1 {
     class Program {
         static void Main(string[] args) {
-            SendWithName();
+            SendWithoutName();
         }
         
         private static void SendWithoutName() {
             var apiKey = "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";
             var api = new SendGridApi(apiKey);
 
-            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\e-mail 15 dias_20_11.txt";
+            var archive1 = $"{Environment.CurrentDirectory}\\Emils\\E-MAIL PROSPECÇÃO_22_11.txt";
 
             var txt = File.ReadAllText(archive1, Encoding.GetEncoding("iso-8859-1"));
             txt = txt.Replace(",", Environment.NewLine);
@@ -28,7 +28,7 @@ namespace ConsoleApp1 {
 
             File.WriteAllText(archive1, txt);
 
-            var msg1 = $"Somos da TCM, notamos que houve algum imprevisto com o pagamento da fatura. <br/>Estamos aqui para lhe ajudar.Não perca tempo!<br/>Providencie o pagamento do boleto retirando no portal do assinante: www.tcmhd.com.br ou entre em contato conosco no telefone abaixo, para maiores informações.<br/>Ligue agora: <a href='tel: 8433150700'>084 33150700</a><br/><br/><br/>Caso tenha pago, favor desconsiderar esse e-mail.<br/>4C Consultoria -Relacionamento com o cliente da TCM";
+            var msg1 = $"Chegou no seu bairro a Internet Fibra Óptica, venha se conectar com ultravelocidade.<br/><br/>Para os primeiros 200 clientes, desconto nos primeiros 3 meses no plano Turbo Fibra 20 MB de R$ 129,00 por R$89,90, Taxa de instalação facilitada em até 3X, ou Turbo Fibra 50 MB de R$ 169,00 por R$ 119,90,  taxa de instalação GRÁTIS.<br/><br/>Ligue agora <a href=\"tel: 40202324\">40202324</a> ou WhatsApp <a href=\"https://api.whatsapp.com/send?phone=5564993331062\">64993331062</a>";
 
             using (var sr = new StreamReader(archive1, Encoding.GetEncoding("iso-8859-1"))) {
                 string contato;
@@ -50,9 +50,9 @@ namespace ConsoleApp1 {
 
                 foreach (var splited in emailsSpliteed) {
                     var email = new Email {
-                        From = new Contact { Name = "TCM", Email = "fatura@tcmcabo.com.br" },
+                        From = new Contact { Name = "Lanteca Telecom", Email = "relacionamento@lantecatelecom.com.br" },
                         To = splited,
-                        Subject = "Comunicado TCM",
+                        Subject = "",
                         PlainTextContent = "",
                         HtmlContent = msg1
                     };
