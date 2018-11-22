@@ -52,7 +52,7 @@ namespace ConsoleApp1 {
                     var email = new Email {
                         From = new Contact { Name = "Lanteca Telecom", Email = "relacionamento@lantecatelecom.com.br" },
                         To = splited,
-                        Subject = "",
+                        Subject = "Equipe Lanteca Telecom",
                         PlainTextContent = "",
                         HtmlContent = msg1
                     };
