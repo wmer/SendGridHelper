@@ -10,6 +10,6 @@ namespace SendGridHelper.Models {
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime Date { get; set; }
-        public virtual BillingRangeMessage GetBillingRangeMessage { get; set; }
+        public virtual BillingRangeMessage BillingRangeMessage { get; set; }
     }
 }
