@@ -13,6 +13,5 @@ namespace SendGridHelper.Models {
         public string PlainTextContent { get; set; }
         public string HtmlContent { get; set; } = "";
         public bool ShowAllRecipients { get; set; }
-        public virtual Company Campaign { get; set; }
     }
 }
