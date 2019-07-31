@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SendGridHelper.Helpers {
@@ -13,13 +14,12 @@ namespace SendGridHelper.Helpers {
             }
         }
 
-        public static List<List<T>> SplitList<T>(this List<T> locations, int nSize = 30) {
-            var list = new List<List<T>>();
-            for (int i = 0; i < locations.Count; i += nSize) {
-                list.Add(locations.GetRange(i, Math.Min(nSize, locations.Count - i)));
-            }
-
-            return list;
+        public static IEnumerable<IEnumerable<T>> SplitList<T>(this IEnumerable<T> locations, int nSize = 30) {
+            return locations
+                        .Select((x, i) => new { Index = i, Value = x })
+                        .GroupBy(x => x.Index / nSize)
+                        .Select(x => x.Select(v => v.Value).ToList())
+                        .ToList();
         }
     }
 }
