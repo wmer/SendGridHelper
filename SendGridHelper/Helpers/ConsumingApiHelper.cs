@@ -32,6 +32,7 @@ namespace SendGridHelper.Helpers {
         public async Task<(T result, string statusCode, string message)> GetAssync<T>(string endPoint) {
             try {
                 var response = await _client.GetAsync($"{_baseAddress}{endPoint}");
+                var header = response.Headers;
                 return DeserializeResponse<T>(response);
             } catch (Exception e) {
                 return (default(T), null, e.Message);
