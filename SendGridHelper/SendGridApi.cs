@@ -20,14 +20,16 @@ namespace SendGridHelper {
             _consumingApiHelper = new ConsumingApiHelper(apiKey);
         }
 
-        public async Task<Response> SendSingleEmail(Email email, string file = null) {
+        public async Task<Response> SendSingleEmail(Email email, params string[] files) {
             var msg = email.ToSendGridMessageToSingleRecipient();
-            if (file != null) {
-                var fileInfo = new FileInfo(file);
-                using (var fileStream = File.OpenRead(file)) {
-                    await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
-                    return await _client.SendEmailAsync(msg);
+            if (files != null) {
+                foreach(var file in files) {
+                    var fileInfo = new FileInfo(file);
+                    using(var fileStream = File.OpenRead(file)) {
+                        await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
+                    }
                 }
+
             }
             return await _client.SendEmailAsync(msg);
         }
