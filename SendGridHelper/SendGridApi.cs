@@ -4,6 +4,7 @@ using SendGridHelper.Helpers;
 using SendGridHelper.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,11 @@ namespace SendGridHelper {
             var msg = email.ToSendGridMessageToSingleRecipient();
             if (files != null) {
                 foreach(var file in files) {
-                    var fileInfo = new FileInfo(file);
-                    using(var fileStream = File.OpenRead(file)) {
-                        await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
+                    if(!string.IsNullOrEmpty(file)) {
+                        var fileInfo = new FileInfo(file);
+                        using(var fileStream = File.OpenRead(file)) {
+                            await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
+                        }
                     }
                 }
 
@@ -34,14 +37,18 @@ namespace SendGridHelper {
             return await _client.SendEmailAsync(msg);
         }
 
-        public async Task<Response> SendToMultipleRecipients(Email email, string file = null) {
+        public async Task<Response> SendToMultipleRecipients(Email email, params string[] files) {
             var msg = email.ToSendGridMessageToMultipleRecipients();
-            if (file != null) {
-                using (var fileStream = File.OpenRead(file)) {
-                    var fileInfo = new FileInfo(file);
-                    await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
-                    return await _client.SendEmailAsync(msg);
+            if (files != null) {
+                foreach(var file in files) {
+                    if(!string.IsNullOrEmpty(file)) {
+                        var fileInfo = new FileInfo(file);
+                        using(var fileStream = File.OpenRead(file)) {
+                            await msg.AddAttachmentAsync(fileInfo.Name, fileStream);
+                        }
+                    }
                 }
+                return await _client.SendEmailAsync(msg);
             }
             return await _client.SendEmailAsync(msg);
         }
